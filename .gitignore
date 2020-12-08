@@ -1,0 +1,96 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# compiled output
+/conFusion/dist
+/conFusion/tmp
+/conFusion/out-tsc
+
+# dependencies
+/conFusion/node_modules
+
+# IDEs and editors
+/conFusion/.idea
+/conFusion/.project
+/conFusion/.classpath
+/conFusion/.c9/
+/conFusion/*.launch
+/conFusion/.settings/
+/conFusion/*.sublime-workspace
+
+# IDE - VSCode
+/conFusion/.vscode/*
+/conFusion/!.vscode/settings.json
+/conFusion/!.vscode/tasks.json
+/conFusion/!.vscode/launch.json
+/conFusion/!.vscode/extensions.json
+
+# misc
+/conFusion/.sass-cache
+/conFusion/connect.lock
+/conFusion/coverage
+/conFusion/libpeerconnection.log
+/conFusion/npm-debug.log
+/conFusion/yarn-error.log
+/conFusion/testem.log
+/conFusion/typings
+
+# System Files
+/conFusion/.DS_Store
+/conFusion/Thumbs.db
+
+/conFusion/.editorconfig
+/conFusion/.gitignore
+/conFusion/e2e
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# compiled output
+/dist
+/tmp
+/out-tsc
+
+# dependencies
+/node_modules
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# misc
+/.sass-cache
+/connect.lock
+/coverage
+/libpeerconnection.log
+npm-debug.log
+yarn-error.log
+testem.log
+/typings
+
+# System Files
+.DS_Store
+Thumbs.db
