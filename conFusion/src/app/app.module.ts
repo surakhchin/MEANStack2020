@@ -9,6 +9,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from "@angular/material";
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { DishService } from './services/dish.service';
 import {PromotionService} from './services/promotion.service'
@@ -66,7 +67,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatSlideToggleModule,
     MatSelectModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatProgressSpinnerModule
   ],
   entryComponents: [
         LoginComponent
