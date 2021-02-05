@@ -10,7 +10,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from "@angular/material";
 
-import { DishService } from './services/dish.service';666666666666669
+import { DishService } from './services/dish.service';
 import {PromotionService} from './services/promotion.service'
 
 // hammerjs is used for gestures

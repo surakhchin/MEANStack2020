@@ -30,8 +30,10 @@ export class MenuComponent implements OnInit {
               private leaderService: LeaderService) { }
 
   ngOnInit() {
-    this.dishes = this.dishService.getDishes();
-    this.leaders = this.leaderService.getLeaders();
+   this.dishService.getDishes()
+        .then(dishes => this.dishes = dishes);
+    this.leaderService.getLeaders()
+        .then(leaders => this.leaders = leaders);
 
   }
 
