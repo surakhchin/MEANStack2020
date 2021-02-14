@@ -15,7 +15,7 @@ export class DishService {
   // }
 
   getDishes(): Promise<Dish[]> {
-    return new Promise(resolve => {
+    return new Promise((resolve, reject) => {
       // Simulate server latency with 2 second delay
         setTimeout(() => resolve(DISHES), 2000)
     });
