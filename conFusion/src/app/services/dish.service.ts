@@ -22,7 +22,7 @@ export class DishService {
   }
 
   getDish(id: string): Promise<Dish> {
-    return new Promise(resolve=> {
+    return new Promise((resolve, reject)=> {
       // Simulate server latency with 2 second delay
         setTimeout(() => resolve(DISHES.filter((dish) => (dish.id === id))[0]), 2000);
     });
