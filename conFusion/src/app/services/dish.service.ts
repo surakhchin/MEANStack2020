@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { Dish } from '../shared/dish';
 import { DISHES } from '../shared/dishes';
 
+import { Observable, of } from 'rxjs';
+import { delay } from 'rxjs/operators';
 
 
 @Injectable({
@@ -10,29 +12,56 @@ import { DISHES } from '../shared/dishes';
 })
 export class DishService {
 
+  // Basic way to use a Promise to instantly Resolve DISHES
   // getDishes(): Promise<Dish[]> {
   //   return Promise.resolve(DISHES);
   // }
 
-  getDishes(): Promise<Dish[]> {
-    return new Promise((resolve, reject) => {
-      // Simulate server latency with 2 second delay
-        setTimeout(() => resolve(DISHES), 2000)
-    });
+  // A more realistic way of using a Promise to simulate a 2 sec delay and then Resolve DISHES
+  // getDishes(): Promise<Dish[]> {
+  //   return new Promise((resolve, reject) => {
+  //     // Simulate server latency with 2 second delay
+  //       setTimeout(() => resolve(DISHES), 2000)
+  //   });
+  // }
+
+  // Here we use the Observable pattern in services at first but then convert to Promises so Components can use the Promise
+  // getDishes(): Promise<Dish[]> {
+  //   return of(DISHES).pipe(delay(2000)).toPromise();
+  // }
+
+  // Here we want to directly operate with observables and subsrcribe to them in the component.
+  getDishes(): Observable<Dish[]> {
+    return of(DISHES).pipe(delay(2000));
   }
 
-  getDish(id: string): Promise<Dish> {
-    return new Promise((resolve, reject)=> {
-      // Simulate server latency with 2 second delay
-        setTimeout(() => resolve(DISHES.filter((dish) => (dish.id === id))[0]), 2000);
-    });
+  // getDish(id: string): Promise<Dish> {
+  //   return new Promise((resolve, reject)=> {
+  //     // Simulate server latency with 2 second delay
+  //       setTimeout(() => resolve(DISHES.filter((dish) => (dish.id === id))[0]), 2000);
+  //   });
+  // }
+  //
+  // getFeaturedDish(): Promise<Dish> {
+  //   return  new Promise(resolve=> {
+  //     // Simulate server latency with 2 second delay
+  //       setTimeout(() => resolve(DISHES.filter((dish) => dish.featured)[0]), 2000);
+  //   });
+  // }
+
+
+
+  getDish(id: string): Observable<Dish> {
+    return of(DISHES.filter(dish => (dish.id === id))[0]).pipe(delay(2000));
   }
 
-  getFeaturedDish(): Promise<Dish> {
-    return  new Promise(resolve=> {
-      // Simulate server latency with 2 second delay
-        setTimeout(() => resolve(DISHES.filter((dish) => dish.featured)[0]), 2000);
-    });
+  getFeaturedDish(): Observable<Dish> {
+    return of(DISHES.filter(dish => dish.featured)[0]).pipe(delay(2000));
+  }
+
+
+  getDishIds(): Observable<string[] | any> {
+    return of(DISHES.map(dish => dish.id ));
   }
 
   constructor() { }

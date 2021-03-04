@@ -30,10 +30,16 @@ export class MenuComponent implements OnInit {
               private leaderService: LeaderService) { }
 
   ngOnInit() {
-   this.dishService.getDishes()
-        .then(dishes => this.dishes = dishes);
-    this.leaderService.getLeaders()
-        .then(leaders => this.leaders = leaders);
+
+   // this is when we had Promises, now we are using Observables
+   // this.dishService.getDishes()
+   //      .then(dishes => this.dishes = dishes);
+
+    this.dishService.getDishes().subscribe(dishes => this.dishes = dishes);
+
+
+    this.leaderService.getLeaders().subscribe(leaders => this.leaders = leaders);
+
 
   }
 
