@@ -45,4 +45,36 @@
 
   </div>
 
+
+
+  <div fxFlex style="width: 100%">
+
+    <form novalidate [formGroup]="commentForm" #cform="ngForm" (ngSubmit)="onSubmit()">
+      <p>
+        <mat-form-field class="">
+            <input matInput formControlName="author" placeholder="Your Name" type="text" required>
+            <mat-error *ngIf="formErrors.author">{{formErrors.author}}</mat-error>
+        </mat-form-field>
+        </p>
+        <p>
+          <mat-slider formControlName="rating" min="1" max="5" step="1" value="5" required type="range"></mat-slider>
+          <mat-error *ngIf="formErrors.rating">{{formErrors.rating}}</mat-error>
+      </p>
+      <p>
+          <mat-form-field class="">
+            <input matInput formControlName="comment" placeholder="Your Comment" type="text" required>
+            <mat-error *ngIf="formErrors.comment">{{formErrors.comment}}</mat-error>
+          </mat-form-field>
+      </p>
+
+      <!--note here we are disabling the Form Model from template, but below we are disabling the data model in the ts file-->
+      <!--<button type="submit" mat-button class="background-primary text-floral-white" [disabled]="fform.form.invalid">Submit</button>-->
+      <button type="submit" mat-button class="background-primary text-floral-white" [disabled]="commentForm.invalid">Submit</button>
+    </form>
+
+        <h3>Your Comment</h3>
+        <p>{{ commentForm.value | json }} {{ commentForm.status | json }}</p>
+
+  </div>
+
 </div>
