@@ -18,6 +18,7 @@ export class MenuComponent implements OnInit {
 
   dishes: Dish[];
   leaders: Leader[];
+  errMess: string;
 
   // selectedDish: Dish;
   //
@@ -35,7 +36,8 @@ export class MenuComponent implements OnInit {
    // this.dishService.getDishes()
    //      .then(dishes => this.dishes = dishes);
 
-    this.dishService.getDishes().subscribe(dishes => this.dishes = dishes);
+    this.dishService.getDishes().subscribe(dishes => this.dishes = dishes,
+        errmess => this.errMess = <any>errmess);
 
 
     this.leaderService.getLeaders().subscribe(leaders => this.leaders = leaders);

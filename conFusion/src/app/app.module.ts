@@ -14,6 +14,7 @@ import {MatSliderModule} from '@angular/material/slider';
 
 import { DishService } from './services/dish.service';
 import {PromotionService} from './services/promotion.service'
+import {ProcessHTTPMsgService} from './services/process-httpmsg.service'
 
 // hammerjs is used for gestures
 import 'hammerjs';
@@ -81,7 +82,7 @@ import { baseURL } from './shared/baseurl';
   entryComponents: [
         LoginComponent
   ],
-  providers: [DishService, PromotionService, LeaderService,
+  providers: [DishService, PromotionService, LeaderService, ProcessHTTPMsgService,
   {provide: 'BaseURL', useValue: baseURL}],
   bootstrap: [AppComponent]
 })

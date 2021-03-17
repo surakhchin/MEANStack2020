@@ -6,8 +6,8 @@
     fxLayoutGap="10px"
     fxLayoutGap.xs="0">
 
-  <div fxFlex="40">
-    <mat-card *ngIf="dish">
+  <div fxFlex="40" *ngIf="dish">
+    <mat-card>
       <mat-card-header>
         <mat-card-title>
           <h3 *ngIf="dish">{{dish.name | uppercase}}</h3>
@@ -29,9 +29,9 @@
     </mat-card>
   </div>
 
-  <div fxFlex="40">
+  <div fxFlex="40" *ngIf="dish">
 
-    <mat-list role="list" *ngIf="dish">
+    <mat-list role="list">
       <h3>Comments</h3>
       <mat-list-item role="listitem" *ngFor="let comment of dish.comments">
           <h4 mat-line>{{comment.comment}}</h4>
@@ -75,6 +75,13 @@
         <h3>Your Comment</h3>
         <p>{{ commentForm.value | json }} {{ commentForm.status | json }}</p>
 
+  </div>
+  <div [hidden]="dish || errMess">
+    <mat-spinner></mat-spinner><h4>Loading . . . Please Wait</h4>
+  </div>
+  <div fxFlex *ngIf="errMess">
+    <h2>Error</h2>
+    <h4>{{errMess}}</h4>
   </div>
 
 </div>
