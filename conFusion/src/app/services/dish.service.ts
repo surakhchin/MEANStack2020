@@ -7,15 +7,20 @@ import { Observable, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
 
 import { map, catchError } from 'rxjs/operators';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { baseURL } from '../shared/baseurl';
 
 import { ProcessHTTPMsgService } from './process-httpmsg.service';
+
+// declare var HttpHeaders: any;
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class DishService {
+
+  private _headers = new HttpHeaders().set('Content-Type', 'application/json');
 
   constructor(private http: HttpClient,
               private processHTTPMsgService: ProcessHTTPMsgService) { }
@@ -79,5 +84,25 @@ export class DishService {
     return this.getDishes().pipe(map(dishes => dishes.map(dish => dish.id)))
         .pipe(catchError(this.processHTTPMsgService.handleError));
   }
+
+
+  putDish(dish: Dish): Observable<Dish> {
+
+
+    // const headers = this._headers.append('foo', 'bar');
+
+    const httpOptions = {
+      headers: this._headers
+    };
+
+    console.log(baseURL)
+
+
+    return this.http.put<Dish>(baseURL + 'dishes/' + dish.id, dish, httpOptions)
+      .pipe(catchError(this.processHTTPMsgService.handleError));
+
+  }
+
+
 
 }

@@ -31,6 +31,7 @@ export class DishdetailComponent implements OnInit {
   commentForm: FormGroup;
   feedback: Feedback;
   contactType = ContactType;
+  dishcopy: Dish;
 
   formErrors = {
     'author': '',
@@ -73,6 +74,7 @@ export class DishdetailComponent implements OnInit {
     private location: Location,
     private fb: FormBuilder) {
     this.createForm();
+
   }
 
 
@@ -83,8 +85,9 @@ export class DishdetailComponent implements OnInit {
 
     this.dishservice.getDishIds().subscribe(dishIds => this.dishIds = dishIds);
     this.route.params
-        .pipe(switchMap((params: Params) => this.dishservice.getDish(params['id'])))
-        .subscribe(dish => { this.dish = dish; this.setPrevNext(dish.id); }, errmess => this.errMess = <any>errmess);
+      .pipe(switchMap((params: Params) => this.dishservice.getDish(params['id'])))
+      .subscribe(dish => { this.dish = dish; this.dishcopy = dish; this.setPrevNext(dish.id); },
+        errmess => this.errMess = <any>errmess );
   }
 
 
@@ -128,15 +131,28 @@ export class DishdetailComponent implements OnInit {
 
   onSubmit() {
     this.feedback = this.commentForm.value;
+    this.feedback.date = new Date().toISOString();
     console.log(this.feedback);
+
+    this.dishcopy.comments.push(this.feedback);
+    this.dishservice.putDish(this.dishcopy)
+      .subscribe(dish => {
+        this.dish = dish; this.dishcopy = dish;
+      },
+      errmess => {
+      console.log('error')});
+
+    this.commentFormDirective.resetForm({rating: '5'});
     this.commentForm.reset({
       author: '',
       comment: '',
       rating: '5',
     });
-    this.feedback['date'] = Date.now();
     this.addComment(this.feedback);
-    this.commentFormDirective.resetForm({rating: '5'});
+
+
+
+
   }
 
 
@@ -148,6 +164,7 @@ export class DishdetailComponent implements OnInit {
     const index = this.dishIds.indexOf(dishId);
     this.prev = this.dishIds[(this.dishIds.length + index - 1) % this.dishIds.length];
     this.next = this.dishIds[(this.dishIds.length + index + 1) % this.dishIds.length];
+
   }
 
 }
